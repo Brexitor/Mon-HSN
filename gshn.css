@@ -1,0 +1,327 @@
+/* ============================================================
+   GSHN - Gestion des Sportifs de Haut Niveau
+   Ministère de la Jeunesse, des Sports et de la Culture - Niger
+   Feuille de style externe : assets/css/gshn.css
+   ============================================================ */
+
+:root {
+  --vert: #0DA651;
+  --orange: #E05206;
+  --or: #F2C200;
+  --vertfonce: #0B6B3A;
+  --gris: #f4f5f7;
+  --texte: #222;
+  --bordure: #ddd;
+  --blanc: #ffffff;
+  --rouge: #c0392b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: var(--gris);
+  color: var(--texte);
+}
+
+/* ---- EN-TÊTE ---- */
+header {
+  background: linear-gradient(90deg, var(--orange) 0%, white 50%, var(--vert) 100%);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 4px solid var(--vertfonce);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+header .titre {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+header .titre img.logo {
+  height: 64px;
+  width: auto;
+}
+
+header .titre .entete-texte {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 8px 14px;
+  border-radius: 7px;
+  line-height: 1.4;
+}
+
+header .titre .entete-texte .republique {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+header .titre .entete-texte .ministere {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--vertfonce);
+  margin-top: 2px;
+}
+
+header .titre .entete-texte .direction {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #444;
+  margin-top: 2px;
+}
+
+.date-header {
+  background: var(--vertfonce);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+/* ---- NAVIGATION ---- */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: var(--vertfonce);
+  padding: 8px 16px;
+}
+
+nav button {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: .15s;
+}
+
+nav button:hover { background: rgba(255, 255, 255, 0.15); }
+
+nav button.active {
+  background: var(--or);
+  color: #1a1a1a;
+  font-weight: bold;
+  border-color: var(--or);
+}
+
+/* ---- CONTENU PRINCIPAL ---- */
+main {
+  padding: 18px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.panel {
+  background: white;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
+}
+
+.panel h2 {
+  margin-top: 0;
+  color: var(--vertfonce);
+  border-bottom: 2px solid var(--or);
+  padding-bottom: 6px;
+}
+
+/* ---- GRILLE ---- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/* ---- FORMULAIRES ---- */
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--bordure);
+  border-radius: 5px;
+  font-size: 0.9rem;
+  background: #fff;
+}
+
+textarea { resize: vertical; min-height: 60px; }
+.field { margin-bottom: 10px; }
+
+/* ---- BOUTONS ---- */
+.btn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-primary { background: var(--vert); color: white; }
+.btn-primary:hover { background: var(--vertfonce); }
+.btn-warning { background: var(--orange); color: white; }
+.btn-warning:hover { background: #b54103; }
+.btn-danger { background: var(--rouge); color: white; }
+.btn-danger:hover { background: #962d22; }
+.btn-secondary { background: #888; color: white; }
+.btn-secondary:hover { background: #666; }
+.btn-gold { background: var(--or); color: #1a1a1a; }
+.btn-gold:hover { background: #d9ab00; }
+
+/* ---- TABLEAUX ---- */
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+
+th, td { border: 1px solid var(--bordure); padding: 8px; text-align: left; }
+
+th {
+  background: var(--vertfonce);
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+tr:nth-child(even) { background: #f9f9f9; }
+tr:hover { background: #eef8f0; }
+
+/* ---- BADGES ---- */
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+}
+
+.b-elite { background: var(--or); color: #1a1a1a; }
+.b-espoir { background: var(--vert); }
+.b-releve { background: var(--orange); }
+.b-suspendu { background: #999; }
+.b-actif { background: var(--vert); }
+.b-blesse { background: var(--rouge); }
+.b-retraite { background: #555; }
+
+/* ---- BARRE D'OUTILS ---- */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.toolbar input, .toolbar select { width: auto; min-width: 160px; }
+
+/* ---- CARTES STATISTIQUES ---- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border-top: 4px solid var(--vert);
+}
+
+.stat-card h3 { margin: 0; font-size: 2rem; color: var(--vertfonce); }
+.stat-card p { margin: 4px 0 0; color: #666; font-size: 0.85rem; }
+
+/* ---- MODAL ---- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.show { display: flex; }
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal h3 { color: var(--vertfonce); margin-top: 0; }
+
+/* ---- ACTIONS TABLEAU ---- */
+.actions-cell { display: flex; gap: 6px; flex-wrap: wrap; }
+.actions-cell button { padding: 4px 8px; font-size: 0.78rem; }
+
+/* ---- PIED DE PAGE ---- */
+footer {
+  text-align: center;
+  padding: 14px;
+  font-size: 0.8rem;
+  color: #555;
+  border-top: 1px solid var(--bordure);
+  background: white;
+}
+
+/* ---- UTILITAIRES ---- */
+.info-box {
+  background: #eafaf0;
+  border-left: 4px solid var(--vert);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+}
+
+.empty { text-align: center; color: #888; padding: 30px; }
+.small { font-size: 0.78rem; color: #777; }
+.tableau-wrap { overflow-x: auto; }
+
+/* ---- IMPRESSION ---- */
+@media print {
+  nav, header .toolbar, .no-print { display: none !important; }
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  header { padding: 10px 12px; }
+  header .titre .entete-texte .republique { font-size: 1rem; }
+  header .titre .entete-texte .ministere { font-size: 0.82rem; }
+  main { padding: 10px; }
+  .grid { grid-template-columns: 1fr; }
+  nav { padding: 6px 10px; }
+  nav button { padding: 6px 10px; font-size: 0.8rem; }
+}

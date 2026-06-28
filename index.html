@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GSHN — Logiciel de Gestion et de Suivi des Sportifs de Haut Niveau. Ministère de la Jeunesse, des Sports et de la Culture — République du Niger.">
+  <meta name="author" content="DAID/RP/IN — MJSC Niger">
+  <meta name="application-name" content="GSHN Niger">
+
+  <!-- Open Graph (aperçu sur réseaux sociaux / GitHub) -->
+  <meta property="og:title"       content="GSHN — Sportifs de Haut Niveau Niger">
+  <meta property="og:description" content="Logiciel institutionnel de gestion des sportifs de haut niveau — DSHN / MJSC — République du Niger">
+  <meta property="og:type"        content="website">
+
+  <title>GSHN — Gestion des Sportifs de Haut Niveau — Niger</title>
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <!-- Feuille de style externe -->
+  <link rel="stylesheet" href="assets/css/gshn.css">
+</head>
+<body>
+
+<!-- =========================================================
+     EN-TÊTE INSTITUTIONNEL
+     ========================================================= -->
+<header>
+  <div class="titre">
+    <img src="assets/icons/logo-gshn.svg" alt="Logo GSHN Niger" class="logo no-print">
+    <div class="entete-texte">
+      <span class="republique">République du Niger</span>
+      <span class="ministere">Ministère de la Jeunesse, des Sports et de la Culture</span>
+      <span class="direction">Direction du Sport de Haut Niveau &mdash; Logiciel GSHN</span>
+    </div>
+  </div>
+  <div class="date-header no-print" id="dateAujourdhui"></div>
+</header>
+
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+<nav>
+  <button class="navbtn active" data-page="tableau-bord">Tableau de bord</button>
+  <button class="navbtn" data-page="sportifs">Sportifs</button>
+  <button class="navbtn" data-page="performances">Performances</button>
+  <button class="navbtn" data-page="medical">Suivi médical</button>
+  <button class="navbtn" data-page="financement">Financement / Bourses</button>
+  <button class="navbtn" data-page="federations">Fédérations</button>
+  <button class="navbtn" data-page="sauvegarde">Sauvegarde / Restauration</button>
+  <button class="navbtn" data-page="apropos">À propos</button>
+</nav>
+
+<!-- =========================================================
+     CONTENU PRINCIPAL
+     ========================================================= -->
+<main>
+
+  <!-- TABLEAU DE BORD -->
+  <div class="page" id="page-tableau-bord">
+    <div class="info-box">
+      Bienvenue dans le Logiciel de Gestion et de Suivi des Sportifs de Haut Niveau (GSHN), conforme à la
+      législation nigérienne relative au sport de haut niveau (loi sur le sport, statut du sportif de haut
+      niveau, et textes réglementaires relevant de la Direction du Sport de Haut Niveau — DSHN). Toutes les
+      données sont stockées localement sur cet ordinateur. Pensez à effectuer des sauvegardes régulières via
+      l'onglet « Sauvegarde / Restauration ».
+    </div>
+    <div class="stats" id="stats-cards"></div>
+    <div class="panel">
+      <h2>Répartition par catégorie</h2>
+      <div id="repartition-categorie"></div>
+    </div>
+    <div class="panel">
+      <h2>Répartition par fédération</h2>
+      <div id="repartition-federation"></div>
+    </div>
+  </div>
+
+  <!-- SPORTIFS -->
+  <div class="page" id="page-sportifs" style="display:none;">
+    <div class="panel">
+      <h2>Liste des sportifs de haut niveau</h2>
+      <div class="toolbar">
+        <input type="text" id="rechercheSportif" placeholder="Rechercher (nom, prénom, discipline…)">
+        <select id="filtreCategorie">
+          <option value="">Toutes catégories</option>
+          <option value="Elite">Elite</option>
+          <option value="Espoir">Espoir</option>
+          <option value="Relève">Relève</option>
+        </select>
+        <select id="filtreFederation"></select>
+        <select id="filtreStatut">
+          <option value="">Tous statuts</option>
+          <option value="Actif">Actif</option>
+          <option value="Blessé">Blessé</option>
+          <option value="Suspendu">Suspendu</option>
+          <option value="Retraité">Retraité</option>
+        </select>
+        <button class="btn btn-primary"   id="btnNouveauSportif">+ Nouveau sportif</button>
+        <button class="btn btn-secondary" id="btnExportListeCSV">Exporter (CSV)</button>
+      </div>
+      <div class="tableau-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Matricule</th><th>Nom &amp; Prénom</th><th>Discipline</th><th>Fédération</th>
+              <th>Catégorie</th><th>Statut</th><th>Date de naissance</th><th>Région</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableSportifs"></tbody>
+        </table>
+      </div>
+      <div id="emptySportifs" class="empty" style="display:none;">Aucun sportif enregistré pour le moment.</div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCES -->
+  <div class="page" id="page-performances" style="display:none;">
+    <div class="panel">
+      <h2>Suivi des performances sportives</h2>
+      <div class="toolbar">
+        <select id="selectSportifPerf"></select>
+        <button class="btn btn-primary" id="btnAjouterPerf">+ Ajouter une performance</button>
+      </div>
+      <div class="tableau-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th><th>Sportif</th><th>Compétition</th><th>Niveau</th>
+              <th>Résultat</th><th>Record</th><th>Observations</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tablePerformances"></tbody>
+        </table>
+      </div>
+      <div id="emptyPerf" class="empty" style="display:none;">Aucune performance enregistrée.</div>
+    </div>
+  </div>
+
+  <!-- MÉDICAL -->
+  <div class="page" id="page-medical" style="display:none;">
+    <div class="panel">
+      <h2>Suivi médical et de la condition physique</h2>
+      <div class="toolbar">
+        <select id="selectSportifMed"></select>
+        <button class="btn btn-primary" id="btnAjouterMed">+ Nouvelle visite / examen</button>
+      </div>
+      <div class="tableau-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th><th>Sportif</th><th>Type d'examen</th>
+              <th>Médecin / Centre</th><th>Aptitude</th><th>Observations</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableMedical"></tbody>
+        </table>
+      </div>
+      <div id="emptyMed" class="empty" style="display:none;">Aucune fiche médicale enregistrée.</div>
+    </div>
+  </div>
+
+  <!-- FINANCEMENT -->
+  <div class="page" id="page-financement" style="display:none;">
+    <div class="panel">
+      <h2>Financement, bourses et primes</h2>
+      <div class="toolbar">
+        <select id="selectSportifFin"></select>
+        <button class="btn btn-primary" id="btnAjouterFin">+ Nouvelle aide / bourse / prime</button>
+      </div>
+      <div class="tableau-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th><th>Sportif</th><th>Type</th><th>Montant (FCFA)</th>
+              <th>Source</th><th>Statut</th><th>Observations</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableFinancement"></tbody>
+        </table>
+      </div>
+      <div id="emptyFin" class="empty" style="display:none;">Aucune aide financière enregistrée.</div>
+      <p class="small" id="totalFinancement"></p>
+    </div>
+  </div>
+
+  <!-- FÉDÉRATIONS -->
+  <div class="page" id="page-federations" style="display:none;">
+    <div class="panel">
+      <h2>Fédérations et disciplines sportives</h2>
+      <div class="info-box">
+        Gérez ici les fédérations sportives nationales reconnues par le Ministère. Vous pouvez ajouter
+        une nouvelle fédération à tout moment ; elle sera immédiatement disponible dans les fiches des sportifs.
+        Vous pouvez également créer une nouvelle fédération directement depuis le formulaire d'ajout d'un sportif.
+      </div>
+      <div class="toolbar" style="align-items:flex-end;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:300px;">
+          <label style="font-size:0.85rem;font-weight:700;display:block;margin-bottom:4px;">
+            Nom de la nouvelle fédération *
+          </label>
+          <input type="text" id="nouvelleFederation" placeholder="Ex : Fédération Nigérienne de Natation" style="width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.85rem;font-weight:700;display:block;margin-bottom:4px;">Discipline principale</label>
+          <input type="text" id="nouvelleFedDiscipline" placeholder="Ex : Natation" style="min-width:180px;">
+        </div>
+        <button class="btn btn-primary" id="btnAjouterFederation" style="height:38px;">+ Ajouter la fédération</button>
+      </div>
+      <div class="tableau-wrap" style="margin-top:14px;">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Fédération</th><th>Discipline</th><th>Nb sportifs</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="tableFederations"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAUVEGARDE / RESTAURATION -->
+  <div class="page" id="page-sauvegarde" style="display:none;">
+    <div class="panel">
+      <h2>Sauvegarde et restauration des données</h2>
+      <div class="info-box">
+        Toutes les données du logiciel (sportifs, performances, suivi médical, financements, fédérations)
+        sont stockées dans la mémoire locale de ce navigateur (stockage local de l'ordinateur).
+        Pour conserver vos données de manière sûre, ou pour les transférer sur un autre poste,
+        utilisez la sauvegarde manuelle ci-dessous : un fichier de sauvegarde (.json) sera téléchargé
+        sur votre ordinateur. Vous pourrez ensuite le restaurer à tout moment.
+      </div>
+      <div class="grid">
+        <div>
+          <h3>1. Créer une sauvegarde (Backup)</h3>
+          <p class="small">Génère un fichier <strong>GSHN_backup_AAAA-MM-JJ.json</strong> contenant toutes les données actuelles.</p>
+          <button class="btn btn-gold" id="btnBackup">Télécharger la sauvegarde</button>
+        </div>
+        <div>
+          <h3>2. Restaurer une sauvegarde</h3>
+          <p class="small">Sélectionnez un fichier de sauvegarde .json précédemment téléchargé. Cela remplacera les données actuelles.</p>
+          <input type="file" id="inputRestore" accept="application/json">
+          <button class="btn btn-warning" id="btnRestore" style="margin-top:8px;">Restaurer</button>
+        </div>
+        <div>
+          <h3>3. Réinitialiser</h3>
+          <p class="small">Supprime toutes les données enregistrées sur ce poste (irréversible). Faites une sauvegarde avant.</p>
+          <button class="btn btn-danger" id="btnReset">Réinitialiser toutes les données</button>
+        </div>
+      </div>
+      <p class="small" id="lastSave"></p>
+    </div>
+  </div>
+
+  <!-- À PROPOS -->
+  <div class="page" id="page-apropos" style="display:none;">
+    <div class="panel">
+      <h2>À propos du logiciel GSHN</h2>
+      <p><strong>GSHN — Logiciel de Gestion et de Suivi des Sportifs de Haut Niveau</strong></p>
+      <p>
+        Ce logiciel a été conçu pour le compte du <strong>Ministère de la Jeunesse, des Sports et de la
+        Culture</strong> de la République du Niger, à travers sa <strong>Direction du Sport de Haut Niveau
+        (DSHN)</strong>, dans le cadre du suivi administratif, sportif, médical et financier des athlètes
+        reconnus de haut niveau, conformément à la législation nigérienne en matière de sport.
+      </p>
+      <p><strong>Fonctionnalités principales :</strong></p>
+      <ul>
+        <li>Gestion des dossiers individuels des sportifs de haut niveau (identité, discipline, fédération, statut)</li>
+        <li>Classement par catégorie : Elite, Espoir, Relève</li>
+        <li>Suivi des performances sportives et records nationaux</li>
+        <li>Suivi médical et de la condition physique</li>
+        <li>Gestion des bourses, primes et aides financières</li>
+        <li>Gestion des fédérations sportives nationales (ajout depuis l'onglet Fédérations <em>ou</em> depuis la fiche d'un sportif)</li>
+        <li>Export de la liste des sportifs au format CSV</li>
+        <li>Fonctionnement 100 % local (sans connexion internet) avec sauvegarde / restauration des données au format JSON</li>
+      </ul>
+      <hr>
+      <p style="text-align:center;font-weight:bold;color:var(--vertfonce);">
+        Logiciel développé par la<br>
+        Direction des Archives, de la Documentation, des Relations Publiques,<br>
+        de l'Informatique et de la Numérisation<br>
+        <strong>(DAID/RP/IN)</strong><br>
+        <span style="font-weight:400;font-size:0.9rem;">Ministère de la Jeunesse, des Sports et de la Culture — République du Niger</span>
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<!-- =========================================================
+     PIED DE PAGE
+     ========================================================= -->
+<footer>
+  GSHN &copy; Direction du Sport de Haut Niveau — Ministère de la Jeunesse, des Sports et de la Culture — République du Niger
+  &nbsp;|&nbsp; Développé par la Direction des Archives, de la Documentation, des Relations Publiques, de l'Informatique et de la Numérisation (DAID/RP/IN)
+</footer>
+
+<!-- =========================================================
+     MODAL
+     ========================================================= -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- Script JavaScript externe -->
+<script src="assets/js/gshn.js"></script>
+
+</body>
+</html>
